@@ -19,9 +19,12 @@ public class Adventure {
     private ArrayList<String> message; //message that the game engine displays
 
     public Adventure(String filename, int id){
+        this.isError=false;
         this.id =0;
         this.player = new Player();
         loadAndValidateJson(filename);
+        this.gameScore=0;
+        this.message = new ArrayList<>();
     }
 
     /**
