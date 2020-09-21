@@ -298,6 +298,8 @@ public class Player {
         //adding 1 word commands first, values will be empty lists
         commandOptions.put("examine", new ArrayList<String>());
         commandOptions.put("introspect", new ArrayList<String>());
+        commandOptions.put("exit", new ArrayList<String>());
+        commandOptions.put("quit", new ArrayList<String>());
 
         //adding 2 word commands, values will be possible arguments to each command
 

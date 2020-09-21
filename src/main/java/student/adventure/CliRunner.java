@@ -10,7 +10,7 @@ public class CliRunner {
 
         // set initial conditions and prompt the user
         Command response = getCommandFromString(a.initializeGame());
-        while(!response.equals("exit")&&!response.equals("quit")){
+        while(!response.getCommandName().equals("exit")&&!response.getCommandName().equals("quit")){
             a.checkWin(a.getPlayer());
             a.processInput(response);
             response=getCommandFromString(a.promptUser());
