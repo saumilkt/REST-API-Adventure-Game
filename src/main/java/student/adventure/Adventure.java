@@ -1,4 +1,6 @@
 package student.adventure;
+import student.server.Command;
+import student.server.GameStatus;
 
 import java.util.*;
 import static java.lang.System.exit;
@@ -9,10 +11,12 @@ import java.io.*;
 
 
 public class Adventure {
+    private int id; // represents the game number
     private Player player; //represents the user
     private RoomLayout rooms; // received from Gson
 
-    public Adventure(String filename){
+    public Adventure(String filename, int id){
+        this.id =0;
         this.player = new Player();
         loadAndValidateJson(filename);
     }
@@ -141,6 +145,56 @@ public class Adventure {
         }
     }
 
+    public void processInput(Command input){
+        //checks length of cammand by testing if Command.commandValue is empty
+        if (input.getCommandValue().equals("")) {
+            /* If above succeeds, the input was 1 word, so check that it's a legal 1 word input,
+             * and call command functions
+             */
+            switch (input.getCommandName().toLowerCase()) {
+                case "examine":
+                    player.getCurrentRoom().displayStatus();
+                    break;
+
+                case "introspect":
+                    player.displayMusicStats();
+                    break;
+
+                default:
+                    //If we get here, the input was not a valid command, and we let the user know that
+                    System.out.println("I don't understand \"" + input + "\"!");
+                    break;
+            }
+
+        } else {
+            /* Getting this far means that the input was 2 words
+             * Now, we read the first word to see if command portion of the input was a legal command
+             * if so, command functions are called.
+             */
+            String command = input.getCommandName();
+            String argument = input.getCommandValue();
+
+            switch (command.toLowerCase()) {
+                case "go":
+                    movePlayer(argument);
+                    break;
+
+                case "take":
+                    takeItem(argument);
+                    break;
+
+                case "drop":
+                    dropItem(argument);
+                    break;
+
+                default:
+                    //If we get here, the input was not a valid command, and we let the user know that
+                    System.out.println("I don't understand \"" + input + "\"!");
+                    break;
+            }
+        }
+    }
+
     /**
      * Moves the player to a different room by changing player.currentroom.
      * @param direction the direction input that the user typed after typing the go command
@@ -215,5 +269,20 @@ public class Adventure {
      */
     public RoomLayout getRoomLayout(){
         return rooms;
+    }
+
+    /**
+     * @return the id number of the game
+     */
+    public int getId(){
+        return id;
+    }
+
+    /**
+     * Assigns the id number of the game. Intended only to be done when instantiating Adventure game.
+     * @param id the intended id number of the game
+     */
+    public void setId(int id){
+        this.id = id;
     }
 }

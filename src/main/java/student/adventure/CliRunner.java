@@ -2,10 +2,10 @@ package student.adventure;
 
 import java.io.FileNotFoundException;
 
-public class Main {
+public class CliRunner {
     public static void main(String[] args) throws FileNotFoundException {
         // TODO: Run an student.adventure.Adventure game on the console
-        Adventure a = new Adventure("src/Json/Working/Mirage.json");
+        Adventure a = new Adventure("src/Json/Working/Mirage.json",0);
 
         // set initial conditions and prompt the user
         String response = a.initializeGame();
