@@ -11,6 +11,7 @@ import java.io.*;
 
 
 public class Adventure {
+    private boolean isError; //boolean value representing if the game is in an error state
     private int id; // represents the game number
     private Player player; //represents the user
     private RoomLayout rooms; // received from Gson
@@ -34,6 +35,7 @@ public class Adventure {
             this.rooms = new RoomLayout(gson.fromJson(reader, new TypeToken<ArrayList<Room>>(){}.getType()));
         }catch(Exception e){
             System.out.println("File is invalid or does not exist");
+            isError=true;
             exit(0);
         }
 
@@ -284,5 +286,12 @@ public class Adventure {
      */
     public void setId(int id){
         this.id = id;
+    }
+
+    /**
+     * @return whether the game is in an error state. Only triggered if json file is invalid or missing.
+     */
+    public boolean getIsError(){
+        return isError;
     }
 }
