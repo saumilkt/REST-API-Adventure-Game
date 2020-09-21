@@ -12,19 +12,21 @@ import java.io.*;
 
 public class Adventure {
     private boolean isError; //boolean value representing if the game is in an error state
-    private int id; // represents the game number
+    private final int id; // represents the game number
     private Player player; //represents the user
     private RoomLayout rooms; // received from Gson
     private int gameScore; //score of game, set upon game end
     private ArrayList<String> message; //message that the game engine displays
+    private final String playerName;
 
     public Adventure(String filename, int id){
         this.isError=false;
-        this.id =0;
+        this.id =id;
         this.player = new Player();
         loadAndValidateJson(filename);
         this.gameScore=0;
         this.message = new ArrayList<>();
+        this.playerName="Player "+id;
     }
 
     /**
@@ -40,6 +42,7 @@ public class Adventure {
             this.rooms = new RoomLayout(gson.fromJson(reader, new TypeToken<ArrayList<Room>>(){}.getType()));
         }catch(Exception e){
             message.add("File is invalid or does not exist");
+            printMessage();
             isError=true;
             exit(0);
         }
@@ -247,14 +250,7 @@ public class Adventure {
         return id;
     }
 
-    /**
-     * Assigns the id number of the game. Intended only to be done when instantiating Adventure game.
-     * @param id the intended id number of the game
-     */
-    public void setId(int id){
-        this.id = id;
-    }
-
+    
     /**
      * @return whether the game is in an error state. Only triggered if json file is invalid or missing.
      */
@@ -274,5 +270,12 @@ public class Adventure {
      */
     public ArrayList<String> getMessage(){
         return message;
+    }
+
+    /**
+     * @return the name of the player who is playing on this Adventure game instance
+     */
+    public String getPlayerName(){
+        return playerName;
     }
 }
