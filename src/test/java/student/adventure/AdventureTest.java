@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import com.google.gson.Gson;
 import student.adventure.Adventure;
+import student.adventure.CliRunner;
 
 import static org.junit.Assert.*;
 
@@ -76,8 +77,8 @@ public class AdventureTest {
 
     @Test
     public void testProcessInputInvalid(){
-        a.processInput("!");
-        assertEquals("\"I don't understand \"!\"", outContent.toString());
+        a.processInput(CliRunner.getCommandFromString("!"));
+        assertEquals("\"I don't understand \"!\"", a.getMessage());
     }
 
     @Test
