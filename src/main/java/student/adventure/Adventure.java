@@ -15,6 +15,7 @@ public class Adventure {
     private int id; // represents the game number
     private Player player; //represents the user
     private RoomLayout rooms; // received from Gson
+    private int gameScore; //score of game, set upon game end
 
     public Adventure(String filename, int id){
         this.id =0;
@@ -77,7 +78,8 @@ public class Adventure {
         //User wins game if he is at a bomb site "A" or "B" and the item "Bomb" is at the bomb site
         if( player.getCurrentRoom().getName().equals("A") || player.getCurrentRoom().getName().equals("B")
                 && player.getCurrentRoom().getItems().contains("Bomb")){
-            //Prints winning message and ends game
+            //Sets final score, prints winning message, and ends game
+            gameScore=player.getNumberOfRoomsTraversed()*10;
             System.out.println("Bomb has been planted...");
             System.out.println("Terrorists win.");
             exit(1);
@@ -107,6 +109,14 @@ public class Adventure {
                 case "introspect":
                     player.displayMusicStats();
                     break;
+
+                // setting final score of game, the exit game
+                case "exit":
+                case "quit": {
+                    gameScore=player.getNumberOfRoomsTraversed();
+                    exit(1);
+                    break;
+                }
 
                 default:
                     //If we get here, the input was not a valid command, and we let the user know that
@@ -239,5 +249,12 @@ public class Adventure {
      */
     public boolean getIsError(){
         return isError;
+    }
+
+    /**
+     * @return final score of game
+     */
+    public int getGameScore(){
+        return gameScore;
     }
 }
