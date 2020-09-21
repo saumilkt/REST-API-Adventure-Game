@@ -180,34 +180,37 @@ public class Room {
     }
 
     /**
-     * This method displays the current state of the room.
+     * This method returns a message stating the current state of the room.
      * This includes: the room name, what directions a player can travel to from the current room,
      * The rooms in those directions, and the items in the current room.
+     * @return the arraylist that contains the current state of the room, described by strings
      */
-    public void displayStatus(){
-        out.println("You are at "+this.getName()); // prints the name of the Current room
-        out.print("From here, you can go: ");
+    public ArrayList<String> displayStatus(){
+        ArrayList<String> roomStatus = new ArrayList<String>();
+        roomStatus.add("You are at "+this.getName()); // prints the name of the Current room
+        roomStatus.add("From here, you can go: ");
 
-        /* Sequentially prints out the directions the player can go from the current room.
+        /* Sequentially adds the directions the player can go from the current room to roomStatus.
          * keySet() returns a list of Strings, comprising of the keys in this.availableDirectionsAndRooms.
          * The keys correspond to the directions available for the player to travel in.
          */
         for(String direction : this.availableDirectionsAndRooms.keySet()){
-            out.print(", "+direction);
+            roomStatus.set(1, roomStatus.get(1)+", "+direction);
         }
-        out.println();
-        out.print("Items visible: ");
 
-        //checking if there are items present in the room, then sequentially printing them out
+        roomStatus.add("Items visible: ");
+
+        //checking if there are items present in the room, then sequentially adding them to roomStatus
         if(this.getItems().size()!=0) {
             for (String item : this.items) {
-                out.print(item);
-                out.println();
+                roomStatus.set(2,roomStatus.get(2)+", "+item);
             }
         }else{
             //Generic response if there are no elements in this.items, meaning there are no items in the current room.
-            out.println("No items visible.");
+            roomStatus.set(2,roomStatus.get(2)+"No items visible.");
         }
+
+        return roomStatus;
     }
 
 }

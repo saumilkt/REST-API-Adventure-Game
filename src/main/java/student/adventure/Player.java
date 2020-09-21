@@ -196,41 +196,41 @@ public class Player {
      * This is the custom functionality.
      * Each room has a Song playing in it. Each song has an artist, genre, and tasteScore,
      * which is a numerical quantification of the quality of the song. Upon user typing the command
-     * "introspect" this function will be called. It displays the songs you've listened to, along with
-     * the most frequently listened to artists and genres. It also displays your average tasteScore, by
-     * diving this.tasteScore by this.numberOfRoomsTraveled.
+     * "introspect" this function will be called.
+     * @return an arraylist containing the message that will be displayed to the user.
+     * It displays the songs you've listened to, along with the most frequently listened to artists and genres.
+     * It also displays your average tasteScore, by diving this.tasteScore by this.numberOfRoomsTraveled.
      */
-    public void displayMusicStats(){
-        // Sequentially prints out every song the player has listened to
-        System.out.print("You've listened to these songs: ");
-        for(String song : this.getSongsListenedTo()){
-            System.out.print(", "+song);
-        }
-        System.out.println();
+    public ArrayList<String> displayMusicStats(){
+        ArrayList<String> musicStats = new ArrayList<String>();
+        // Sequentially adds every song the player has listened to, to first line of List
+        musicStats.add("You've listened to these songs: ");
+        for(String song : this.getSongsListenedTo()) musicStats.set(0,musicStats.get(0) + ", " + song);
 
-        /* Prints out most common artists listened to by using the getMostPopularElements function
-         * to find the mode(s) of the this.artistsListenedTo, and prints them out.
+        /* Adds most common artists listened to by using the getMostPopularElements function
+         * to find the mode(s) of the this.artistsListenedTo, and adds them to list element.
          */
-        System.out.print("Your most popular artist(s) is/are: ");
+        musicStats.add("Your most popular artist(s) is/are: ");
         for(String mode : getMostPopularElements(this.getArtistsListenedTo())){
-            System.out.print(", "+mode);
+            musicStats.set(1,musicStats.get(1) + ", " + mode);
         }
-        System.out.println();
 
-        /* Prints out most common genres listened to by using the getMostPopularElements function
-         * to find the mode(s) of the this.genresListenedTo, and prints them out.
+        /* Adds most common genres listened to by using the getMostPopularElements function
+         * to find the mode(s) of the this.genresListenedTo, and adds them to list element.
          */
-        System.out.print("Your most popular genre(s) is/are: ");
+        musicStats.add("Your most popular genre(s) is/are: ");
         for(String mode : getMostPopularElements(this.getGenresListenedTo())){
-            System.out.print(", "+mode);
+            musicStats.set(2,musicStats.get(2) + ", " + mode);
         }
         System.out.println();
 
-        /* Displays average tasteScore by diving this.tasteScore by this.numberOfRoomsTraveled,
-         * rounded to 2 decimals using Math.round().
+        /* A average tasteScore by diving this.tasteScore by this.numberOfRoomsTraveled,
+         * rounded to 2 decimals using Math.round(). Adds this to musicStats
          */
-        System.out.println("Your musical taste is a "+
+        musicStats.add("Your musical taste is a "+
                 Math.round((this.tasteScore/this.numberOfRoomsTraversed) *100.0)/100.0+" out of 5.0.");
+
+        return musicStats;
     }
 
     /* Code below is to find most popular element in an Array;
