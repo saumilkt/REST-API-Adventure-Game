@@ -99,8 +99,8 @@ public class PlayerTest {
 
     @Test
     public void testGetItems(){
-        a.processInput("go up");
-        a.processInput("take AWP");
+        a.processInput(CliRunner.getCommandFromString("go up"));
+        a.processInput(CliRunner.getCommandFromString("take AWP"));
         assertTrue(a.getPlayer().getItems().contains("AWP"));
     }
 
@@ -119,8 +119,8 @@ public class PlayerTest {
 
     @Test
     public void testRemoveItemOnNonexistentItem(){
-        a.processInput("take AWP");
-        assertEquals("You don't have AWP", outContent.toString());
+        a.processInput(CliRunner.getCommandFromString("take AWP"));
+        assertEquals("You don't have AWP", a.getMessage().get(0));
     }
 
 

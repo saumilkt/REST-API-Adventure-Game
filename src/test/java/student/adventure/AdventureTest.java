@@ -36,24 +36,24 @@ public class AdventureTest {
     @Test
     public void testLoadAndValidateJsonWithEmptyFile(){
         a.loadAndValidateJson("testEmptyJson.json");
-        assertEquals("\"File is invalid or does not exist\"",outContent.toString() );
+        assertEquals("\"File is invalid or does not exist\"",a.getMessage().get(0));
     }
     @Test
     public void testLoadAndValidateJsonWithFaultyJson(){
         a.loadAndValidateJson("testFaultyJson");
-        assertEquals("\"File is invalid or does not exist\"",outContent.toString()) ;
+        assertEquals("\"File is invalid or does not exist\"",a.getMessage().get(0)) ;
     }
 
     @Test
     public void testLoadAndValidateJsonWithMissingFile(){
         a.loadAndValidateJson("Cobblestone.json");
-        assertEquals("\"File is invalid or does not exist\"",outContent.toString() );
+        assertEquals("\"File is invalid or does not exist\"",a.getMessage().get(0));
     }
 
     @Test
     public void testLoadAndValidateJsonWithNonJsonFile(){
         a.loadAndValidateJson("TestNonJson.java");
-        assertEquals("\"File is invalid or does not exist\"", outContent.toString());
+        assertEquals("\"File is invalid or does not exist\"", a.getMessage().get(0));
     }
 
 
@@ -63,7 +63,7 @@ public class AdventureTest {
     }
 
     @Test
-    public void testInitalizeGame(){
+    public void testInitializeGame(){
         assertEquals("Connector", a.getPlayer().getCurrentRoom().getName());
     }
 
@@ -72,77 +72,77 @@ public class AdventureTest {
         a.getPlayer().setCurrentRoom(a.getRoomLayout().getRoomFromName("B"));
         a.getPlayer().getCurrentRoom().addItem("Bomb");
         a.checkWin(a.getPlayer());
-        assertEquals("1",outContent.toString() );
+        assertEquals("1",a.getMessage().get(0) );
     }
 
     @Test
     public void testProcessInputInvalid(){
         a.processInput(CliRunner.getCommandFromString("!"));
-        assertEquals("\"I don't understand \"!\"", a.getMessage());
+        assertEquals("\"I don't understand \"!\"", a.getMessage().get(0));
     }
 
     @Test
     public void testProcessInputCaseFlexibility(){
-        a.processInput("InTrospect");
-        assertEquals("You've listened to these songs: , Baby Pluto",outContent.toString());
+        a.processInput(CliRunner.getCommandFromString("InTrospect"));
+        assertEquals("You've listened to these songs: , Baby Pluto",a.getMessage().get(0));
     }
 
     @Test
     public void testExamine(){
-        a.processInput("examine");
-        assertEquals("You are at connector", outContent.toString() );
+        a.processInput(CliRunner.getCommandFromString("examine"));
+        assertEquals("You are at connector", a.getMessage().get(0) );
     }
 
     @Test
     public void testIntrospect(){
-        a.processInput("introspect");
-        assertEquals("You've listened to these songs: , Baby Pluto" ,outContent.toString());
+        a.processInput(CliRunner.getCommandFromString("introspect"));
+        assertEquals("You've listened to these songs: , Baby Pluto" ,a.getMessage().get(0));
     }
 
 
     @Test
     public void testGo(){
-        a.processInput("go up");
+        a.processInput(CliRunner.getCommandFromString("go up"));
         assertEquals("Mid", a.getPlayer().getCurrentRoom().getName());
     }
 
     @Test
     public void testGoWrongRoomName(){
-        a.processInput("go southwest");
-        assertEquals("I can't go southwest", outContent.toString());
+        a.processInput(CliRunner.getCommandFromString("go southwest"));
+        assertEquals("I can't go southwest", a.getMessage().get(0));
     }
 
     @Test
     public void testTake(){
-        a.processInput("take ump");
+        a.processInput(CliRunner.getCommandFromString("take ump"));
         assertTrue( a.getPlayer().getItems().contains("ump"));
     }
 
     @Test
     public void testTakeNoItem(){
-        a.processInput("take lol");
-        assertEquals("There is not item \"lol\" in the room", outContent.toString());
+        a.processInput(CliRunner.getCommandFromString("take lol"));
+        assertEquals("There is not item \"lol\" in the room", a.getMessage().get(0));
     }
 
     @Test
     public void testDrop(){
-        a.processInput("take ump");
-        a.processInput("go up");
-        a.processInput("drop ump");
+        a.processInput(CliRunner.getCommandFromString("take ump"));
+        a.processInput(CliRunner.getCommandFromString("go up"));
+        a.processInput(CliRunner.getCommandFromString("drop ump"));
         assertTrue(a.getPlayer().getCurrentRoom().getItems().contains("ump"));
     }
 
     @Test
     public void testDropNoItem(){
-        a.processInput("drop lol");
-        assertEquals("You don't have lol",outContent.toString() );
+        a.processInput(CliRunner.getCommandFromString("drop lol"));
+        assertEquals("You don't have lol",a.getMessage().get(0) );
     }
 
     @Test
     public void testDropDuplicateItem(){
         a.getRoomLayout().getRoomFromName("Connector").addItem("ump");
-        a.processInput("drop ump");
-        assertEquals("The item \"ump\" is already in this room!",outContent.toString());
+        a.processInput(CliRunner.getCommandFromString("drop ump"));
+        assertEquals("The item \"ump\" is already in this room!",a.getMessage().get(0));
     }
 
     @Test

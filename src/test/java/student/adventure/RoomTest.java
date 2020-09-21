@@ -56,7 +56,7 @@ public class RoomTest {
 
     @Test
     public void testGetItems(){
-        a.processInput("go up");
+        a.processInput(CliRunner.getCommandFromString("go up"));
         assertEquals(3, a.getPlayer().getCurrentRoom().getItems().size());
         assertTrue( a.getPlayer().getCurrentRoom().getItems().contains("AWP"));
         assertTrue(a.getPlayer().getCurrentRoom().getItems().contains("smoke"));
@@ -78,8 +78,8 @@ public class RoomTest {
 
     @Test
     public void testRemoveItem(){
-        a.processInput("go up");
-        a.processInput("take AWP");
+        a.processInput(CliRunner.getCommandFromString("go up"));
+        a.processInput(CliRunner.getCommandFromString("take AWP"));
         a.getPlayer().getCurrentRoom().removeItem("AWP");
         assertFalse(a.getPlayer().getCurrentRoom().getItems().contains("AWP"));
     }
@@ -119,29 +119,29 @@ public class RoomTest {
 
     @Test
     public void testGetTasteLevel(){
-        //delta due to deprection error
+        //delta due to deprecation error
         assertEquals(4.0, a.getPlayer().getCurrentRoom().getTasteLevel(), 0.0);
     }
 
     @Test
     public void testGetTasteLevelEmpty(){
         a.loadAndValidateJson("testEmptyJsonObject.json");
-        //delta due to deprection error
+        //delta due to deprecation error
         assertEquals(0.0, a.getPlayer().getCurrentRoom().getTasteLevel(), 0.0);
     }
 
     @Test
     public void testDisplayStatusNoItems(){
         a.getPlayer().getCurrentRoom().displayStatus();
-        assertEquals("You are at Connector", outContent.toString());
-        assertEquals("No items visisble", outContent.toString());
+        assertEquals("You are at Connector", a.getMessage().get(0));
+        assertEquals("No items visisble", a.getMessage().get(2));
     }
 
     @Test
     public void testDisplayStatusWithItems(){
         a.getPlayer().getCurrentRoom().addItem("AWP");
         a.getPlayer().getCurrentRoom().displayStatus();
-        assertEquals("You are at Connector", outContent.toString());
-        assertEquals("Items visible: AWP", outContent.toString());
+        assertEquals("You are at Connector", a.getMessage().get(0));
+        assertEquals("Items visible: AWP", a.getMessage().get(2));
     }
 }

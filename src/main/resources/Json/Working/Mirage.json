@@ -7,7 +7,9 @@
   "song": "Baby Pluto",
   "artist": "Lil Uzi Vert",
   "genre": "Hip-Hop/Rap",
-  "tasteLevel": 4.0
+  "tasteLevel": 4.0,
+  "imageUrl" : "https://i.imgur.com/E5kn7Rf.jpg",
+  "videoUrl" : "https://youtu.be/e6ZwwqDYfmY"
 }, {
   "name": "A",
   "availableDirectionsAndRooms": {
@@ -19,7 +21,9 @@
   "song": "@ Meh",
   "artist": "Playboi Carti",
   "genre": "Mumble Rap",
-  "tasteLevel": 2.0
+  "tasteLevel": 2.0,
+  "imageUrl" : "https://bit.ly/2HmO2zV",
+  "videoUrl" : "https://youtu.be/rm7HZpqZKKo"
 },
   {
     "name": "Heaven",
@@ -31,7 +35,9 @@
     "song": "News/Flock",
     "artist": "Xxxtentacion",
     "genre": "Melodic Rap",
-    "tasteLevel": 5.0
+    "tasteLevel": 5.0,
+    "imageUrl" : "https://bit.ly/3kDo9Ko",
+    "videoUrl" : "https://youtu.be/0MW9kObjD-E"
   },
   {
     "name": "T-spawn",
@@ -44,7 +50,9 @@
     "song": "Trombone Concerto",
     "artist": "Rimsky-Korsakov",
     "genre": "Classical",
-    "tasteLevel": -2.0E1074
+    "tasteLevel": -2.0E1074,
+    "imageUrl" : "https://bit.ly/3hOFgaf",
+    "videoUrl" : "https://youtu.be/dbF15hIGHIQ"
   },
   {
     "name": "T-apartments",
@@ -55,7 +63,9 @@
     "song": "KOODA",
     "artist": "6IX9INE",
     "genre": "Soundcloud Rap",
-    "tasteLevel": 3.0
+    "tasteLevel": 3.0,
+    "imageUrl" : "",
+    "videoUrl" : ""
   },
   {
     "name": "B-apartments",
@@ -68,7 +78,9 @@
     "song": "Pathétique",
     "artist": "Beethoven",
     "genre": "Classical",
-    "tasteLevel": 5.0
+    "tasteLevel": 5.0,
+    "imageUrl" : "https://bit.ly/35Zoxii",
+    "videoUrl" : "https://youtu.be/sFXXDiEM1G0"
   },
   {
     "name": "B",
@@ -80,7 +92,9 @@
     "song": "Revolutionary March",
     "artist": "Chopin",
     "genre": "Classical",
-    "tasteLevel": 4.0
+    "tasteLevel": 4.0,
+    "imageUrl" : "https://bit.ly/2RNumHy",
+    "videoUrl" : "https://youtu.be/iBMgu82O-Vc"
   },
   {
     "name": "Market",
@@ -93,7 +107,9 @@
     "song": "Arabesques",
     "artist": "Debussy",
     "genre": "Classical",
-    "tasteLevel": 4.75
+    "tasteLevel": 4.75,
+    "imageUrl" : "https://bit.ly/2RK99y7",
+    "videoUrl" : "https://youtu.be/1rn8ksfgp5Q"
   },
   {
     "name": "CT-spawn",
@@ -105,7 +121,9 @@
     "song": "All the Right Moves",
     "artist": "OneRepublic",
     "genre": "Pop",
-    "tasteLevel": 5.0
+    "tasteLevel": 5.0,
+    "imageUrl" : "https://bit.ly/33LfEq4",
+    "videoUrl" : "https://youtu.be/0zqKY6iPv8Q"
   },
   {
     "name": "Mid",
@@ -120,6 +138,8 @@
     "song": "XXX",
     "artist": "Kendrick Lamar",
     "genre": "Melodic Rap",
-    "tasteLevel": 5.0
+    "tasteLevel": 5.0,
+    "imageUrl" : "https://bit.ly/35XSaAO",
+    "videoUrl" : "https://youtu.be/3kuPk_l7w-g"
   }
 ]
