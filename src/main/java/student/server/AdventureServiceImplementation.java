@@ -37,12 +37,17 @@ public class AdventureServiceImplementation implements AdventureService{
     /**
      * Returns the state of the game instance associated with the given ID.
      * @param id the instance id
-     * @return the current state of the game
+     * @return the current state of the game with id number "id"
      */
     @Override
     public GameStatus getGame(int id) {
         Adventure a = findAdventureInstanceFromId(id);
-        return new GameStatus(a.getIsError(),a.getId(),,,,a.getPlayer().getPlayerAsAdventureState(),);
+        return new GameStatus(a.getIsError(),
+                a.getId(), a.getMessage().toString(),
+                a.getPlayer().getCurrentRoom().getImageUrl(),
+                a.getPlayer().getCurrentRoom().getVideoUrl(),
+                a.getPlayer().getPlayerAsAdventureState(),
+                a.getPlayer().provideCommandOptions());
     }
 
     /**

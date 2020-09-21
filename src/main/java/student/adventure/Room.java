@@ -46,6 +46,9 @@ public class Room {
      */
     private final double tasteLevel;
 
+    private final String imageUrl;
+    private final String videoUrl;
+
     /**
      * This constructor is designed to handle if some parts of the JSON schema are missing
      * It will assign an empty string/map/arraylist or 0 depending on which value is missing.
@@ -58,6 +61,8 @@ public class Room {
         this.artist="";
         this.genre="";
         this.tasteLevel=0.0;
+        this.imageUrl="";
+        this.videoUrl="";
     }
 
     /**
@@ -65,7 +70,7 @@ public class Room {
      * Any values missing will be handled by above contructor.
      */
     public Room(String name, Map<String,String> availableDirectionsAndRooms, ArrayList<String> items,
-                String song, String artist, String genre, double tasteLevel){
+                String song, String artist, String genre, double tasteLevel,String imageUrl, String videoUrl){
         this.name=name;
         this.availableDirectionsAndRooms=availableDirectionsAndRooms;
         for(String item : items){
@@ -76,6 +81,8 @@ public class Room {
         this.artist=artist;
         this.genre=genre;
         this.tasteLevel=tasteLevel;
+        this.imageUrl=imageUrl;
+        this.videoUrl=videoUrl;
     }
 
     /**
@@ -154,6 +161,22 @@ public class Room {
     public double getTasteLevel(){
 
         return this.tasteLevel;
+    }
+
+    /**
+     * @return The url of the image attached to the room
+     */
+    public String getImageUrl(){
+
+        return this.imageUrl;
+    }
+
+    /**
+     * @return The url of the video attached to the room
+     */
+    public String getVideoUrl(){
+
+        return this.videoUrl;
     }
 
     /**
