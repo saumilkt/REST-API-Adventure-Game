@@ -5,13 +5,8 @@ import java.util.ArrayList;
 import java.util.SortedMap;
 
 public class AdventureServiceImplementation implements AdventureService{
-    private ArrayList<Adventure> adventureGamesList; //contains a list of all adventure games
-    private int newGameIdNumber=0; //id number of the next game to be instantiated
-
-    public AdventureServiceImplementation() {
-        this.newGameIdNumber=0;
-        this.adventureGamesList= new ArrayList<Adventure>();
-    }
+    private static ArrayList<Adventure> adventureGamesList = new ArrayList<Adventure>();; //contains a list of all adventure games
+    private static int newGameIdNumber=0; //id number of the next game to be instantiated
 
     /**
      * Resets the service to its initial state.
