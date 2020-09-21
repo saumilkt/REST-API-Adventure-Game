@@ -36,7 +36,7 @@ public class Adventure {
             JsonReader reader = new JsonReader(new FileReader(filename));
             this.rooms = new RoomLayout(gson.fromJson(reader, new TypeToken<ArrayList<Room>>(){}.getType()));
         }catch(Exception e){
-            System.out.println("File is invalid or does not exist");
+            message.add("File is invalid or does not exist");
             isError=true;
             exit(0);
         }
@@ -97,6 +97,7 @@ public class Adventure {
      * The program checks which of those two commands the input is, and then passes the value to command functions.
      */
     public void processInput(Command input){
+        this.message.clear(); // clears previous messages in message instance variable
         //checks length of cammand by testing if Command.commandValue is empty
         if (input.getCommandValue().equals("")) {
             /* If above succeeds, the input was 1 word, so check that it's a legal 1 word input,
@@ -104,11 +105,11 @@ public class Adventure {
              */
             switch (input.getCommandName().toLowerCase()) {
                 case "examine":
-                    player.getCurrentRoom().displayStatus();
+                    message=player.getCurrentRoom().displayStatus();
                     break;
 
                 case "introspect":
-                    player.displayMusicStats();
+                    message = player.displayMusicStats();
                     break;
 
                 // setting final score of game, the exit game
@@ -121,7 +122,7 @@ public class Adventure {
 
                 default:
                     //If we get here, the input was not a valid command, and we let the user know that
-                    System.out.println("I don't understand \"" + input + "\"!");
+                    message.add("I don't understand \"" + input + "\"!");
                     break;
             }
 
@@ -148,7 +149,7 @@ public class Adventure {
 
                 default:
                     //If we get here, the input was not a valid command, and we let the user know that
-                    System.out.println("I don't understand \"" + input + "\"!");
+                    message.add("I don't understand \"" + input + "\"!");
                     break;
             }
         }
@@ -161,7 +162,7 @@ public class Adventure {
     public void movePlayer(String direction){
         //checks if the direction is in the map of available directions. if not, lets user know
         if(!player.getCurrentRoom().getAvailableDirectionsAndRooms().containsKey(direction)){
-            System.out.println("I can't go "+direction);
+            message.add("I can't go "+direction);
             return;
         }
         //adds 1 to number of rooms traveled, and sets current room to the room in direction of input
@@ -183,11 +184,11 @@ public class Adventure {
     public void takeItem(String item){
         //check for duplicate item in player's list
         if(player.getItems().contains(item)){
-            System.out.println("I already have the item "+item+".");
+            message.add("I already have the item "+item+".");
 
         //checks if item input is actually in the room
         }else if(!player.getCurrentRoom().getItems().contains(item)){
-            System.out.println("There is no item "+item+" in the room.");
+            message.add("There is no item "+item+" in the room.");
 
         //adds item to player's item list and removes it from room's item list
         }else{
@@ -203,16 +204,22 @@ public class Adventure {
     public void dropItem(String item){
         //checks if item input is actually in the player's item list
         if(!player.getItems().contains(item)){
-            System.out.println("You don't have "+item+".");
+            message.add("You don't have "+item+".");
 
             //check for duplicate item in room's list
         }else if(player.getCurrentRoom().getItems().contains(item)){
-            System.out.println("The item "+item+" is already in this room!");
+            message.add("The item "+item+" is already in this room!");
 
             //adds item to room's item list and removes it from player's item list
         }else{
             player.removeItem(item);
             player.getCurrentRoom().addItem(item);
+        }
+    }
+
+    public void printMessage(){
+        for(String message : this.message){
+            System.out.println(message);
         }
     }
 

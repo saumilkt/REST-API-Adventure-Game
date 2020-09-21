@@ -10,15 +10,22 @@ public class CliRunner {
 
         // set initial conditions and prompt the user
         Command response = getCommandFromString(a.initializeGame());
+        a.printMessage();
         while(!response.getCommandName().equals("exit")&&!response.getCommandName().equals("quit")){
             a.checkWin(a.getPlayer());
             a.processInput(response);
+            a.printMessage();
             response=getCommandFromString(a.promptUser());
 
         }
     }
 
-    private static Command getCommandFromString(String input){
+    /**
+     * Converts String input from scanner to Command object
+     * @param input String gained from user via Scanner class
+     * @return Command object consisting of user's input
+     */
+    public static Command getCommandFromString(String input){
         input = input.trim();
         Command command;
 
