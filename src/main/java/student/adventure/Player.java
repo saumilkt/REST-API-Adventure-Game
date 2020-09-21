@@ -1,4 +1,5 @@
 package student.adventure;
+import student.server.AdventureState;
 
 import java.util.*;
 
@@ -275,5 +276,14 @@ public class Player {
             }
         }
         return mostPopularElement;
+    }
+
+    /**
+     * Returns the Player's information as an AdventureState Object to allow for JSON serialization
+     * @return an AdventureState object that contains the player's information
+     */
+    public AdventureState getPlayerAsAdventureState(){
+        return new AdventureState(numberOfRoomsTraversed,songsListenedTo,artistsListenedTo,genresListenedTo,
+                tasteScore, currentRoom.getName(),items);
     }
 }
