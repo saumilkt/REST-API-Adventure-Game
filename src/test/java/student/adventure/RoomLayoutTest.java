@@ -1,4 +1,4 @@
-package student.a;
+package student.adventure;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

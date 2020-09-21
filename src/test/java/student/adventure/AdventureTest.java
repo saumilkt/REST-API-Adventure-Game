@@ -1,4 +1,4 @@
-package student.a;
+package student.adventure;
 
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
