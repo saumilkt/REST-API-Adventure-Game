@@ -21,7 +21,7 @@ public class AdventureTest {
     @Before
     public void setUp() throws FileNotFoundException {
         // This is run before every test.
-        a = new Adventure("src/Json/Working/Mirage.json");
+        a = new Adventure("src/Json/Working/Mirage.json",0);
         a.initializeGame();
         System.setOut(new PrintStream(outContent));
     }

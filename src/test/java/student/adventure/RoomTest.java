@@ -1,4 +1,4 @@
-package student.a;
+package student.adventure;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -6,7 +6,6 @@ import com.google.gson.stream.JsonReader;
 import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Test;
-import student.adventure.Adventure;
 
 import static org.junit.Assert.*;
 import java.io.ByteArrayOutputStream;
@@ -22,7 +21,7 @@ public class RoomTest {
     @Before
     public void setUp() throws FileNotFoundException {
         // This is run before every test.
-        a = new Adventure("\"src/Json/Working/Mirage.json\"");
+        a = new Adventure("\"src/Json/Working/Mirage.json\"",0);
         a.initializeGame();
         System.setOut(new PrintStream(outContent));
 
