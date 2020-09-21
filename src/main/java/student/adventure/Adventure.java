@@ -16,6 +16,7 @@ public class Adventure {
     private Player player; //represents the user
     private RoomLayout rooms; // received from Gson
     private int gameScore; //score of game, set upon game end
+    private ArrayList<String> message; //message that the game engine displays
 
     public Adventure(String filename, int id){
         this.id =0;
@@ -256,5 +257,12 @@ public class Adventure {
      */
     public int getGameScore(){
         return gameScore;
+    }
+
+    /**
+     * @return the message the console prints out, as ArrayList
+     */
+    public ArrayList<String> getMessage(){
+        return message;
     }
 }
