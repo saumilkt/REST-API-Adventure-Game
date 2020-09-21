@@ -1,0 +1,120 @@
+[{
+  "name": "Connector",
+  "availableDirectionsAndRooms": {
+    "up": "Mid"
+  },
+}, {
+  "name": "A",
+  "availableDirectionsAndRooms": {
+    "north": "Heaven",
+    "west": "Mid",
+    "south": "CT-spawn"
+  },
+  "items": "ak47",
+  "song": "@ Meh",
+  "artist": "Playboi Carti",
+  "genre": "Mumble Rap",
+  "tasteLevel": 2.0
+},
+  {
+    "name": "Heaven",
+    "availableDirectionsAndRooms": {
+      "south": "A",
+      "west": "T-spawn"
+    },
+    "items": "Deagle",
+    "song": "News/Flock",
+    "artist": "Xxxtentacion",
+    "genre": "Melodic Rap",
+    "tasteLevel": 5.0
+  },
+  {
+    "name": "T-spawn",
+    "availableDirectionsAndRooms": {
+      "east": "Heaven",
+      "west": "T-apartments",
+      "south": "Mid"
+    },
+    "items": ["Bomb", "Tec-9"],
+    "song": "Trombone Concerto",
+    "artist": "Rimsky-Korsakov",
+    "genre": "Classical",
+    "tasteLevel": -2.0E1074
+  },
+  {
+    "name": "T-apartments",
+    "availableDirectionsAndRooms": {
+      "east": "T-spawn",
+      "south": "B-apartments"
+    },
+    "song": "KOODA",
+    "artist": "6IX9INE",
+    "genre": "Soundcloud Rap",
+    "tasteLevel": 3.0
+  },
+  {
+    "name": "B-Apartments",
+    "availableDirectionsAndRooms": {
+      "south": "B",
+      "east": "Mid",
+      "north": "T-apartments"
+    },
+    "items": ["M4A1-S", "frag"],
+    "song": "Pathétique",
+    "artist": "Beethoven",
+    "genre": "Classical",
+    "tasteLevel": 5.0
+  },
+  {
+    "name": "B",
+    "availableDirectionsAndRooms": {
+      "east": "Market",
+      "north": "T-apartments"
+    },
+    "items": "Negev",
+    "song": "Revolutionary March",
+    "artist": "Chopin",
+    "genre": "Classical",
+    "tasteLevel": 4.0
+  },
+  {
+    "name": "Market",
+    "availableDirectionsAndRooms": {
+      "north": "Mid",
+      "west": "B",
+      "east": "CT-spawn"
+    },
+    "items": ["scout", "flash"],
+    "song": "Arabesques",
+    "artist": "Debussy",
+    "genre": "Classical",
+    "tasteLevel": 4.75
+  },
+  {
+    "name": "CT-spawn",
+    "availableDirectionsAndRooms": {
+      "north": "A",
+      "west": "Market"
+    },
+    "items": "Deagle",
+    "song": "All the Right Moves",
+    "artist": "OneRepublic",
+    "genre": "Pop",
+    "tasteLevel": 5.0
+  },
+  {
+    "name": "Mid",
+    "availableDirectionsAndRooms": {
+      "east": "A",
+      "west": "B-apartments",
+      "south": "Market",
+      "north": "T-spawn",
+      "down": "Connector"
+    },
+    "items": ["AWP", "smoke", "Five-seveN"],
+    "song": "XXX",
+    "artist": "Kendrick Lamar",
+    "genre": "Melodic Rap",
+    "tasteLevel": 5.0
+  }
+]
