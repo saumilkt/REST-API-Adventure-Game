@@ -19,8 +19,9 @@ public class Command {
      */
     private String playerName;
 
-    public Command() {
-
+    public Command(String commandName) {
+        this.commandName = commandName;
+        this.commandValue = "";
     }
 
     public Command(String commandName, String commandValue) {
