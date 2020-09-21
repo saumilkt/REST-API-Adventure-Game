@@ -93,60 +93,6 @@ public class Adventure {
      * and those that don't (examine, introspect).
      * The program checks which of those two commands the input is, and then passes the value to command functions.
      */
-    public void processInput(String input) {
-        // removing whitespace
-        input = input.trim();
-
-        //checks if the input is 1 or 2 words using String split() function and if statement to test length
-        String[] inputString = input.split(" ", 2);
-        if (inputString.length == 1) {
-            /* If above succeeds, the input was 1 word, so check that it's a legal 1 word input,
-             * and call command functions
-             */
-            switch (input.toLowerCase()) {
-                case "examine":
-                    player.getCurrentRoom().displayStatus();
-                    break;
-
-                case "introspect":
-                    player.displayMusicStats();
-                    break;
-
-                default:
-                    //If we get here, the input was not a valid command, and we let the user know that
-                    System.out.println("I don't understand \"" + input + "\"!");
-                    break;
-            }
-
-        } else {
-            /* Getting this far means that the input was 2 words
-             * Now, we read the first word to see if command portion of the input was a legal command
-             * if so, command functions are called.
-             */
-            String command = inputString[0];
-            String argument = inputString[1];
-
-            switch (command.toLowerCase()) {
-                case "go":
-                    movePlayer(argument);
-                    break;
-
-                case "take":
-                    takeItem(argument);
-                    break;
-
-                case "drop":
-                    dropItem(argument);
-                    break;
-
-                default:
-                    //If we get here, the input was not a valid command, and we let the user know that
-                    System.out.println("I don't understand \"" + input + "\"!");
-                    break;
-            }
-        }
-    }
-
     public void processInput(Command input){
         //checks length of cammand by testing if Command.commandValue is empty
         if (input.getCommandValue().equals("")) {
