@@ -1,19 +1,18 @@
 package student.adventure;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
+
 import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Test;
-import student.adventure.Adventure;
+
 
 import static org.junit.Assert.*;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+
 import java.io.PrintStream;
-import java.util.ArrayList;
+import java.sql.SQLException;
+
 
 public class RoomLayoutTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -21,7 +20,7 @@ public class RoomLayoutTest {
 
 
     @Before
-    public void setUp() throws FileNotFoundException {
+    public void setUp() throws FileNotFoundException, SQLException {
         // This is run before every test.
         a = new Adventure("src/Json/Working/Mirage.json",0);
         a.initializeGame();

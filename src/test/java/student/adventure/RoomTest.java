@@ -12,6 +12,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RoomTest {
@@ -19,7 +20,7 @@ public class RoomTest {
     private Adventure a;
 
     @Before
-    public void setUp() throws FileNotFoundException {
+    public void setUp() throws FileNotFoundException, SQLException {
         // This is run before every test.
         a = new Adventure("\"src/Json/Working/Mirage.json\"",0);
         a.initializeGame();
@@ -39,7 +40,7 @@ public class RoomTest {
     }
 
     @Test
-    public void testGetNameEmpty(){
+    public void testGetNameEmpty() throws SQLException {
         a.loadAndValidateJson("testEmptyJsonObject.json");
         assertEquals("", a.getPlayer().getCurrentRoom().getName()  );
     }
@@ -49,13 +50,13 @@ public class RoomTest {
     }
 
     @Test
-    public void testGetAvailableDirectionsAndRoomsEmpty(){
+    public void testGetAvailableDirectionsAndRoomsEmpty() throws SQLException {
         a.loadAndValidateJson("testEmptyJsonObject.json");
         assertEquals(0, a.getPlayer().getCurrentRoom().getAvailableDirectionsAndRooms().size());
     }
 
     @Test
-    public void testGetItems(){
+    public void testGetItems() throws SQLException {
         a.processInput(CliRunner.getCommandFromString("go up"));
         assertEquals(3, a.getPlayer().getCurrentRoom().getItems().size());
         assertTrue( a.getPlayer().getCurrentRoom().getItems().contains("AWP"));
@@ -64,7 +65,7 @@ public class RoomTest {
     }
 
     @Test
-    public void testGetItemsEmpty(){
+    public void testGetItemsEmpty() throws SQLException {
         a.loadAndValidateJson("testEmptyJsonObject.json");
         assertEquals(0, a.getPlayer().getCurrentRoom().getItems().size());
     }
@@ -77,7 +78,7 @@ public class RoomTest {
     }
 
     @Test
-    public void testRemoveItem(){
+    public void testRemoveItem() throws SQLException {
         a.processInput(CliRunner.getCommandFromString("go up"));
         a.processInput(CliRunner.getCommandFromString("take AWP"));
         a.getPlayer().getCurrentRoom().removeItem("AWP");
@@ -90,7 +91,7 @@ public class RoomTest {
     }
 
     @Test
-    public void testGetSongEmpty(){
+    public void testGetSongEmpty() throws SQLException {
         a.loadAndValidateJson("testEmptyJsonObject.json");
         assertEquals("", a.getPlayer().getCurrentRoom().getSong());
     }
@@ -101,7 +102,7 @@ public class RoomTest {
     }
 
     @Test
-    public void testGetArtistEmpty(){
+    public void testGetArtistEmpty() throws SQLException {
         a.loadAndValidateJson("testEmptyJsonObject.json");
         assertEquals("", a.getPlayer().getCurrentRoom().getArtist());
     }
@@ -112,7 +113,7 @@ public class RoomTest {
     }
 
     @Test
-    public void testGetGenreEmpty(){
+    public void testGetGenreEmpty() throws SQLException {
         a.loadAndValidateJson("testEmptyJsonObject.json");
         assertEquals("", a.getPlayer().getCurrentRoom().getGenre());
     }
@@ -124,7 +125,7 @@ public class RoomTest {
     }
 
     @Test
-    public void testGetTasteLevelEmpty(){
+    public void testGetTasteLevelEmpty() throws SQLException {
         a.loadAndValidateJson("testEmptyJsonObject.json");
         //delta due to deprecation error
         assertEquals(0.0, a.getPlayer().getCurrentRoom().getTasteLevel(), 0.0);

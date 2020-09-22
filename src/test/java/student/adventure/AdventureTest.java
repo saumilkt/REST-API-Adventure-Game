@@ -1,18 +1,13 @@
 package student.adventure;
 
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
 import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Test;
-import com.google.gson.Gson;
-import student.adventure.Adventure;
-import student.adventure.CliRunner;
 
 import static org.junit.Assert.*;
 
 import java.io.*;
-import java.util.ArrayList;
+import java.sql.SQLException;
 
 
 public class AdventureTest {
@@ -20,7 +15,7 @@ public class AdventureTest {
     private Adventure a;
 
     @Before
-    public void setUp() throws FileNotFoundException {
+    public void setUp() throws FileNotFoundException, SQLException {
         // This is run before every test.
         a = new Adventure("src/Json/Working/Mirage.json",0);
         a.initializeGame();
@@ -34,24 +29,24 @@ public class AdventureTest {
     }
 
     @Test
-    public void testLoadAndValidateJsonWithEmptyFile(){
+    public void testLoadAndValidateJsonWithEmptyFile() throws SQLException {
         a.loadAndValidateJson("testEmptyJson.json");
         assertEquals("\"File is invalid or does not exist\"",a.getMessage().get(0));
     }
     @Test
-    public void testLoadAndValidateJsonWithFaultyJson(){
+    public void testLoadAndValidateJsonWithFaultyJson() throws SQLException {
         a.loadAndValidateJson("testFaultyJson");
         assertEquals("\"File is invalid or does not exist\"",a.getMessage().get(0)) ;
     }
 
     @Test
-    public void testLoadAndValidateJsonWithMissingFile(){
+    public void testLoadAndValidateJsonWithMissingFile() throws SQLException {
         a.loadAndValidateJson("Cobblestone.json");
         assertEquals("\"File is invalid or does not exist\"",a.getMessage().get(0));
     }
 
     @Test
-    public void testLoadAndValidateJsonWithNonJsonFile(){
+    public void testLoadAndValidateJsonWithNonJsonFile() throws SQLException {
         a.loadAndValidateJson("TestNonJson.java");
         assertEquals("\"File is invalid or does not exist\"", a.getMessage().get(0));
     }
@@ -68,7 +63,7 @@ public class AdventureTest {
     }
 
     @Test
-    public void testCheckWin(){
+    public void testCheckWin() throws SQLException {
         a.getPlayer().setCurrentRoom(a.getRoomLayout().getRoomFromName("B"));
         a.getPlayer().getCurrentRoom().addItem("Bomb");
         a.checkWin(a.getPlayer());
@@ -76,56 +71,56 @@ public class AdventureTest {
     }
 
     @Test
-    public void testProcessInputInvalid(){
+    public void testProcessInputInvalid() throws SQLException {
         a.processInput(CliRunner.getCommandFromString("!"));
         assertEquals("\"I don't understand \"!\"", a.getMessage().get(0));
     }
 
     @Test
-    public void testProcessInputCaseFlexibility(){
+    public void testProcessInputCaseFlexibility() throws SQLException {
         a.processInput(CliRunner.getCommandFromString("InTrospect"));
         assertEquals("You've listened to these songs: , Baby Pluto",a.getMessage().get(0));
     }
 
     @Test
-    public void testExamine(){
+    public void testExamine() throws SQLException {
         a.processInput(CliRunner.getCommandFromString("examine"));
         assertEquals("You are at connector", a.getMessage().get(0) );
     }
 
     @Test
-    public void testIntrospect(){
+    public void testIntrospect() throws SQLException {
         a.processInput(CliRunner.getCommandFromString("introspect"));
         assertEquals("You've listened to these songs: , Baby Pluto" ,a.getMessage().get(0));
     }
 
 
     @Test
-    public void testGo(){
+    public void testGo() throws SQLException {
         a.processInput(CliRunner.getCommandFromString("go up"));
         assertEquals("Mid", a.getPlayer().getCurrentRoom().getName());
     }
 
     @Test
-    public void testGoWrongRoomName(){
+    public void testGoWrongRoomName() throws SQLException {
         a.processInput(CliRunner.getCommandFromString("go southwest"));
         assertEquals("I can't go southwest", a.getMessage().get(0));
     }
 
     @Test
-    public void testTake(){
+    public void testTake() throws SQLException {
         a.processInput(CliRunner.getCommandFromString("take ump"));
         assertTrue( a.getPlayer().getItems().contains("ump"));
     }
 
     @Test
-    public void testTakeNoItem(){
+    public void testTakeNoItem() throws SQLException {
         a.processInput(CliRunner.getCommandFromString("take lol"));
         assertEquals("There is not item \"lol\" in the room", a.getMessage().get(0));
     }
 
     @Test
-    public void testDrop(){
+    public void testDrop() throws SQLException {
         a.processInput(CliRunner.getCommandFromString("take ump"));
         a.processInput(CliRunner.getCommandFromString("go up"));
         a.processInput(CliRunner.getCommandFromString("drop ump"));
@@ -133,13 +128,13 @@ public class AdventureTest {
     }
 
     @Test
-    public void testDropNoItem(){
+    public void testDropNoItem() throws SQLException {
         a.processInput(CliRunner.getCommandFromString("drop lol"));
         assertEquals("You don't have lol",a.getMessage().get(0) );
     }
 
     @Test
-    public void testDropDuplicateItem(){
+    public void testDropDuplicateItem() throws SQLException {
         a.getRoomLayout().getRoomFromName("Connector").addItem("ump");
         a.processInput(CliRunner.getCommandFromString("drop ump"));
         assertEquals("The item \"ump\" is already in this room!",a.getMessage().get(0));
