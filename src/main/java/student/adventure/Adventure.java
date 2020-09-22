@@ -1,6 +1,6 @@
 package student.adventure;
 import student.server.Command;
-import student.server.GameStatus;
+import java.sql.*;
 
 import java.util.*;
 import static java.lang.System.exit;
@@ -11,15 +11,20 @@ import java.io.*;
 
 
 public class Adventure {
+    //URL of the database that the game data will be stored in
+    private final static String DATABASE_URL = "jdbc:sqlite:src/main/resources/adventure.db";
+    //connection to the above db
+    private final Connection dbConnection;
+
     private boolean isError; //boolean value representing if the game is in an error state
     private final int id; // represents the game number
     private Player player; //represents the user
     private RoomLayout rooms; // received from Gson
     private int gameScore; //score of game, set upon game end
-    private ArrayList<String> message; //message that the game engine displays
-    private final String playerName;
+    private ArrayList<String> message; //message that game engine displays, same as eponymous var in GameStatus
+    private final String playerName; //The name of the player.
 
-    public Adventure(String filename, int id){
+    public Adventure(String filename, int id) throws SQLException {
         this.isError=false;
         this.id =id;
         this.player = new Player();
@@ -27,13 +32,14 @@ public class Adventure {
         this.gameScore=0;
         this.message = new ArrayList<>();
         this.playerName="Player "+id;
+        dbConnection = DriverManager.getConnection(DATABASE_URL);
     }
 
     /**
      * Checks if the Json in the file filename is valid, if so assigns the data to RoomLayout via Gson parser
      * @param filename file name of the Json data of Rooms
      */
-    public void loadAndValidateJson(String filename){
+    public void loadAndValidateJson(String filename) throws SQLException {
         // If exception is thrown, file is invalid or missing, so pragram shuts down
         try{
             //If data is good, assign Json data to rooms using Gson
@@ -41,6 +47,7 @@ public class Adventure {
             JsonReader reader = new JsonReader(new FileReader(filename));
             this.rooms = new RoomLayout(gson.fromJson(reader, new TypeToken<ArrayList<Room>>(){}.getType()));
         }catch(Exception e){
+            addGameToTable();
             message.add("File is invalid or does not exist");
             printMessage();
             isError=true;
@@ -81,12 +88,13 @@ public class Adventure {
      * Checks if the player is in the win condition
      * @param player the player representing the user
      */
-    public void checkWin(Player player){
+    public void checkWin(Player player) throws SQLException {
         //User wins game if he is at a bomb site "A" or "B" and the item "Bomb" is at the bomb site
         if( player.getCurrentRoom().getName().equals("A") || player.getCurrentRoom().getName().equals("B")
                 && player.getCurrentRoom().getItems().contains("Bomb")){
             //Sets final score, prints winning message, and ends game
             gameScore=player.getNumberOfRoomsTraversed()*10;
+            addGameToTable();
             System.out.println("Bomb has been planted...");
             System.out.println("Terrorists win.");
             exit(1);
@@ -95,16 +103,17 @@ public class Adventure {
     }
 
     /**
-     * The meat of the class. Gets the user's commands decides what, if any, methods to call based on commands
-     * and arguments given by user
+     * The meat of the class. Gets the user's commands decides what, if any,
+     * methods to call based on commands and arguments given by user
      * @param input the input the user types into the console
      * There are 2 types of commands, those that have an argument (go, take, etc.)
      * and those that don't (examine, introspect).
-     * The program checks which of those two commands the input is, and then passes the value to command functions.
+     * The program checks which of those two commands the input is,
+     * and then passes the value to command functions.
      */
-    public void processInput(Command input){
+    public void processInput(Command input) throws SQLException {
         this.message.clear(); // clears previous messages in message instance variable
-        //checks length of cammand by testing if Command.commandValue is empty
+        //checks length of command by testing if Command.commandValue is empty
         if (input.getCommandValue().equals("")) {
             /* If above succeeds, the input was 1 word, so check that it's a legal 1 word input,
              * and call command functions
@@ -122,6 +131,7 @@ public class Adventure {
                 case "exit":
                 case "quit": {
                     gameScore=player.getNumberOfRoomsTraversed();
+                    addGameToTable();
                     exit(1);
                     break;
                 }
@@ -277,5 +287,15 @@ public class Adventure {
      */
     public String getPlayerName(){
         return playerName;
+    }
+
+    /**
+     * Adds the Game's name and score to the leaderboard table in adventure.db
+     * Only called when game ends
+     * @throws SQLException
+     */
+    private void addGameToTable() throws SQLException {
+        Statement stmt = dbConnection.createStatement();
+        stmt.execute("INSERT INTO leaderboard_saumilt2 "+ "VALUES("+getPlayerName()+","+getGameScore()+")");
     }
 }
