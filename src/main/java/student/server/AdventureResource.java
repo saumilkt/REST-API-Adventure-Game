@@ -3,13 +3,22 @@ package student.server;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.sql.SQLException;
 
 @Path("/")
 public class AdventureResource {
     /**
      * The single static adventure service instance used for this API.
      */
-    private static AdventureService service = new AdventureServiceImplementation();
+    private static AdventureService service;
+
+    static {
+        try {
+            service = new AdventureServiceImplementation();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 
     /**
      * The API endpoint to test connectivity.
@@ -101,7 +110,7 @@ public class AdventureResource {
     @GET
     @Path("leaderboard")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response fetchLeaderboard() {
+    public Response fetchLeaderboard() throws SQLException {
         return Response.ok(service.fetchLeaderboard()).build();
     }
 

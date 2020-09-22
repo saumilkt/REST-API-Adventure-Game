@@ -1,16 +1,23 @@
 package student.server;
 import student.adventure.*;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.SortedMap;
+import java.util.TreeMap;
 
 public class AdventureServiceImplementation implements AdventureService{
+    //URL of the database that the game data will be stored in
+    private final static String DATABASE_URL = "jdbc:sqlite:src/main/resources/adventure.db";
+    //connection to the above db
+    private final Connection dbConnection;
     private ArrayList<Adventure> adventureGamesList; //contains a list of all adventure games
     private int newGameIdNumber=0; //id number of the next game to be instantiated
 
-    public AdventureServiceImplementation() {
+    public AdventureServiceImplementation() throws SQLException {
         this.newGameIdNumber=0;
         this.adventureGamesList= new ArrayList<Adventure>();
+        dbConnection = DriverManager.getConnection(DATABASE_URL);
     }
 
     /**
@@ -28,7 +35,12 @@ public class AdventureServiceImplementation implements AdventureService{
      */
     @Override
     public int newGame() throws AdventureException {
-        Adventure a = new Adventure("\"src/Json/Working/Mirage.json\"",newGameIdNumber);
+        Adventure a = null;
+        try {
+            a = new Adventure("\"src/Json/Working/Mirage.json\"",newGameIdNumber);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         addToAdventureGamesList(a);
         iterateNewGameIdNumber();
         return newGameIdNumber;
@@ -77,7 +89,11 @@ public class AdventureServiceImplementation implements AdventureService{
      */
     @Override
     public void executeCommand(int id, Command command) {
-        findAdventureInstanceFromId(id).processInput(command);
+        try {
+            findAdventureInstanceFromId(id).processInput(command);
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -85,8 +101,21 @@ public class AdventureServiceImplementation implements AdventureService{
      * @return a sorted map of player names to scores
      */
     @Override
-    public SortedMap<String, Integer> fetchLeaderboard() {
-        return null;
+    public SortedMap<String, Integer> fetchLeaderboard() throws SQLException {
+        Statement stmt = dbConnection.createStatement();
+        ResultSet results;
+        if(stmt.execute("SELECT name, score FROM leaderboard_saumilt2 ORDER BY score")){
+            results = stmt.getResultSet();
+        }else {
+            return null;
+        }
+
+        SortedMap<String,Integer> leaderboard= new TreeMap<>();
+        ResultSetMetaData md = results.getMetaData();
+        for(int rowNum=0;rowNum<md.getColumnCount();rowNum++){
+            leaderboard.put(results.getString("name"),results.getInt("score"));
+        }
+        return leaderboard;
     }
 
     /**
