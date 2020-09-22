@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class CliRunner {
     public static void main(String[] args) throws FileNotFoundException, SQLException {
         // TODO: Run an student.adventure.Adventure game on the console
-        Adventure a = new Adventure("src/Json/Working/Mirage.json",0);
+        Adventure a = new Adventure("src/main/resources/Json/Working/Mirage.json",0);
 
         // set initial conditions and prompt the user
         Command response = getCommandFromString(a.initializeGame());
@@ -35,7 +35,7 @@ public class CliRunner {
         if (inputString.length == 1){
             command = new Command(input);
         }else{
-            command = new Command(input.split(" ,2")[0],input.split(" ",2)[1]);
+            command = new Command(input.split(" ",2)[0],input.split(" ",2)[1]);
         }
 
         return command;

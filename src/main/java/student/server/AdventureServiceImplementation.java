@@ -37,7 +37,7 @@ public class AdventureServiceImplementation implements AdventureService{
     public int newGame() throws AdventureException {
         Adventure a = null;
         try {
-            a = new Adventure("\"src/Json/Working/Mirage.json\"",newGameIdNumber);
+            a = new Adventure("\"src/main/resources/Json/Working/Mirage.json\"",newGameIdNumber);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

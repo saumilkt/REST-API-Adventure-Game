@@ -40,4 +40,11 @@ public class Command {
     public String getPlayerName() {
         return playerName;
     }
+
+    @Override
+    public String toString(){
+        System.out.println(commandName);
+        System.out.println(commandValue);
+        return commandName+" "+commandValue;
+    }
 }

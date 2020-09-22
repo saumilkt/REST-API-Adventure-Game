@@ -18,14 +18,14 @@ public class Adventure {
     //URL of the database that the game data will be stored in
     private final static String DATABASE_URL = "jdbc:sqlite:src/main/resources/adventure.db";
     //connection to the above db
-    private final Connection dbConnection;
+    private final Connection dbConnection=DriverManager.getConnection(DATABASE_URL);;
 
     private boolean isError; //boolean value representing if the game is in an error state
     private final int id; // represents the game number
     private Player player; //represents the user
     private RoomLayout rooms; // received from Gson
     private int gameScore; //score of game, set upon game end
-    private ArrayList<String> message; //message that game engine displays, same as eponymous var in GameStatus
+    private ArrayList<String> message=new ArrayList<>(); //message that game engine displays, same as eponymous var in GameStatus
     private final String playerName; //The name of the player.
 
     public Adventure(String filename, int id) throws SQLException {
@@ -34,9 +34,8 @@ public class Adventure {
         this.player = new Player();
         loadAndValidateJson(filename);
         this.gameScore=0;
-        this.message = new ArrayList<>();
+        //this.message = new ArrayList<String>();
         this.playerName="Player "+id;
-        dbConnection = DriverManager.getConnection(DATABASE_URL);
     }
 
     /**
@@ -51,6 +50,7 @@ public class Adventure {
             JsonReader reader = new JsonReader(new FileReader(filename));
             this.rooms = new RoomLayout(gson.fromJson(reader, new TypeToken<ArrayList<Room>>(){}.getType()));
         }catch(Exception e){
+            e.printStackTrace();
             addGameToTable();
             message.add("File is invalid or does not exist");
             printMessage();
@@ -83,7 +83,7 @@ public class Adventure {
         player.setCurrentRoom(rooms.getRooms().get(0));
         player.addToNumberOfRoomsTraversed();
         player.updateMusicStatus();
-        player.getCurrentRoom().displayStatus();
+        message.addAll(player.getCurrentRoom().displayStatus());
         checkWin(player);
         return promptUser();
     }
@@ -142,7 +142,7 @@ public class Adventure {
 
                 default:
                     //If we get here, the input was not a valid command, and we let the user know that
-                    message.add("I don't understand \"" + input + "\"!");
+                    message.add("I don't understand \"" + input.toString() + "\"!");
                     break;
             }
 
@@ -169,7 +169,7 @@ public class Adventure {
 
                 default:
                     //If we get here, the input was not a valid command, and we let the user know that
-                    message.add("I don't understand \"" + input + "\"!");
+                    message.add("I don't understand \"" + input.toString() + "\"!");
                     break;
             }
         }
@@ -194,7 +194,7 @@ public class Adventure {
          * and displays the room's information'
          */
         player.updateMusicStatus();
-        player.getCurrentRoom().displayStatus();
+        message.addAll(player.getCurrentRoom().displayStatus());
     }
 
     /**
@@ -300,6 +300,6 @@ public class Adventure {
      */
     private void addGameToTable() throws SQLException {
         Statement stmt = dbConnection.createStatement();
-        stmt.execute("INSERT INTO leaderboard_saumilt2 "+ "VALUES("+getPlayerName()+","+getGameScore()+")");
+        stmt.execute("INSERT INTO leaderboard_saumilt2 "+ "VALUES(\'"+getPlayerName()+"\',"+getGameScore()+")");
     }
 }
