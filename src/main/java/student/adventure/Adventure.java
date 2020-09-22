@@ -1,13 +1,17 @@
 package student.adventure;
 import student.server.Command;
-import java.sql.*;
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 import static java.lang.System.exit;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.reflect.TypeToken;
-import java.io.*;
+import java.io.FileReader;
 
 
 public class Adventure {
@@ -75,7 +79,7 @@ public class Adventure {
      * displays the room's information.
      * @return Finally, promts the user and returns the user's input
      */
-    public String initializeGame(){
+    public String initializeGame() throws SQLException {
         player.setCurrentRoom(rooms.getRooms().get(0));
         player.addToNumberOfRoomsTraversed();
         player.updateMusicStatus();

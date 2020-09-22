@@ -2,9 +2,10 @@ package student.adventure;
 import student.server.Command;
 
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
 
 public class CliRunner {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, SQLException {
         // TODO: Run an student.adventure.Adventure game on the console
         Adventure a = new Adventure("src/Json/Working/Mirage.json",0);
 
