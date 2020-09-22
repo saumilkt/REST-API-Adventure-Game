@@ -16,7 +16,7 @@ public interface AdventureService {
      * Creates a new Adventure game and stores it.
      * @return the id of the game.
      */
-    int newGame() throws AdventureException;
+    int newGame() throws AdventureException, SQLException;
 
     /**
      * Returns the state of the game instance associated with the given ID.

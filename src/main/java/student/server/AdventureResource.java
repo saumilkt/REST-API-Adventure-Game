@@ -50,7 +50,7 @@ public class AdventureResource {
     @POST
     @Path("create")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create() throws AdventureException {
+    public Response create() throws AdventureException, SQLException {
         int id = service.newGame();
         return getGame(id);
     }

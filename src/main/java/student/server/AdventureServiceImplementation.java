@@ -34,16 +34,13 @@ public class AdventureServiceImplementation implements AdventureService{
      * @return the id of the game.
      */
     @Override
-    public int newGame() throws AdventureException {
-        Adventure a = null;
-        try {
-            a = new Adventure("\"src/main/resources/Json/Working/Mirage.json\"",newGameIdNumber);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+    public int newGame() throws AdventureException, SQLException {
+        Adventure a = new Adventure("src/main/resources/Json/Working/Mirage.json",newGameIdNumber);
+        a.initializeGameWeb();
+        a.processInput(CliRunner.getCommandFromString("examine"));
         addToAdventureGamesList(a);
         iterateNewGameIdNumber();
-        return newGameIdNumber;
+        return newGameIdNumber-1;
     }
 
     /**
