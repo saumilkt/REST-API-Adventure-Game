@@ -114,8 +114,8 @@ public class Adventure {
             //Sets final score, prints winning message, and ends game
             gameScore=player.getNumberOfRoomsTraversed()*10;
             addGameToTable();
-            System.out.println("Bomb has been planted...");
-            System.out.println("Terrorists win.");
+            message.add("Bomb has been planted...");
+            message.add("Terrorists win.");
             exit(1);
 
         }
