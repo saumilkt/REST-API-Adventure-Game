@@ -57,7 +57,7 @@ public class RoomTest {
 
     @Test
     public void testGetItems() throws SQLException {
-        a.processInput(CliRunner.getCommandFromString("go up"));
+        a.processInput(Adventure.getCommandFromString("go up"));
         assertEquals(3, a.getPlayer().getCurrentRoom().getItems().size());
         assertTrue( a.getPlayer().getCurrentRoom().getItems().contains("AWP"));
         assertTrue(a.getPlayer().getCurrentRoom().getItems().contains("smoke"));
@@ -79,8 +79,8 @@ public class RoomTest {
 
     @Test
     public void testRemoveItem() throws SQLException {
-        a.processInput(CliRunner.getCommandFromString("go up"));
-        a.processInput(CliRunner.getCommandFromString("take AWP"));
+        a.processInput(Adventure.getCommandFromString("go up"));
+        a.processInput(Adventure.getCommandFromString("take AWP"));
         a.getPlayer().getCurrentRoom().removeItem("AWP");
         assertFalse(a.getPlayer().getCurrentRoom().getItems().contains("AWP"));
     }

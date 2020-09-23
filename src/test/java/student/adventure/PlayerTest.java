@@ -98,8 +98,8 @@ public class PlayerTest {
 
     @Test
     public void testGetItems() throws SQLException {
-        a.processInput(CliRunner.getCommandFromString("go up"));
-        a.processInput(CliRunner.getCommandFromString("take AWP"));
+        a.processInput(Adventure.getCommandFromString("go up"));
+        a.processInput(Adventure.getCommandFromString("take AWP"));
         assertTrue(a.getPlayer().getItems().contains("AWP"));
     }
 
@@ -118,7 +118,7 @@ public class PlayerTest {
 
     @Test
     public void testRemoveItemOnNonexistentItem() throws SQLException {
-        a.processInput(CliRunner.getCommandFromString("take AWP"));
+        a.processInput(Adventure.getCommandFromString("take AWP"));
         assertEquals("You don't have AWP", a.getMessage().get(0));
     }
 

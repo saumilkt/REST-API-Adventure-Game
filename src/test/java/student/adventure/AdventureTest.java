@@ -72,71 +72,71 @@ public class AdventureTest {
 
     @Test
     public void testProcessInputInvalid() throws SQLException {
-        a.processInput(CliRunner.getCommandFromString("!"));
+        a.processInput(Adventure.getCommandFromString("!"));
         assertEquals("\"I don't understand \"!\"", a.getMessage().get(0));
     }
 
     @Test
     public void testProcessInputCaseFlexibility() throws SQLException {
-        a.processInput(CliRunner.getCommandFromString("InTrospect"));
+        a.processInput(Adventure.getCommandFromString("InTrospect"));
         assertEquals("You've listened to these songs: , Baby Pluto",a.getMessage().get(0));
     }
 
     @Test
     public void testExamine() throws SQLException {
-        a.processInput(CliRunner.getCommandFromString("examine"));
+        a.processInput(Adventure.getCommandFromString("examine"));
         assertEquals("You are at connector", a.getMessage().get(0) );
     }
 
     @Test
     public void testIntrospect() throws SQLException {
-        a.processInput(CliRunner.getCommandFromString("introspect"));
+        a.processInput(Adventure.getCommandFromString("introspect"));
         assertEquals("You've listened to these songs: , Baby Pluto" ,a.getMessage().get(0));
     }
 
 
     @Test
     public void testGo() throws SQLException {
-        a.processInput(CliRunner.getCommandFromString("go up"));
+        a.processInput(Adventure.getCommandFromString("go up"));
         assertEquals("Mid", a.getPlayer().getCurrentRoom().getName());
     }
 
     @Test
     public void testGoWrongRoomName() throws SQLException {
-        a.processInput(CliRunner.getCommandFromString("go southwest"));
+        a.processInput(Adventure.getCommandFromString("go southwest"));
         assertEquals("I can't go southwest", a.getMessage().get(0));
     }
 
     @Test
     public void testTake() throws SQLException {
-        a.processInput(CliRunner.getCommandFromString("take ump"));
+        a.processInput(Adventure.getCommandFromString("take ump"));
         assertTrue( a.getPlayer().getItems().contains("ump"));
     }
 
     @Test
     public void testTakeNoItem() throws SQLException {
-        a.processInput(CliRunner.getCommandFromString("take lol"));
+        a.processInput(Adventure.getCommandFromString("take lol"));
         assertEquals("There is not item \"lol\" in the room", a.getMessage().get(0));
     }
 
     @Test
     public void testDrop() throws SQLException {
-        a.processInput(CliRunner.getCommandFromString("take ump"));
-        a.processInput(CliRunner.getCommandFromString("go up"));
-        a.processInput(CliRunner.getCommandFromString("drop ump"));
+        a.processInput(Adventure.getCommandFromString("take ump"));
+        a.processInput(Adventure.getCommandFromString("go up"));
+        a.processInput(Adventure.getCommandFromString("drop ump"));
         assertTrue(a.getPlayer().getCurrentRoom().getItems().contains("ump"));
     }
 
     @Test
     public void testDropNoItem() throws SQLException {
-        a.processInput(CliRunner.getCommandFromString("drop lol"));
+        a.processInput(Adventure.getCommandFromString("drop lol"));
         assertEquals("You don't have lol",a.getMessage().get(0) );
     }
 
     @Test
     public void testDropDuplicateItem() throws SQLException {
         a.getRoomLayout().getRoomFromName("Connector").addItem("ump");
-        a.processInput(CliRunner.getCommandFromString("drop ump"));
+        a.processInput(Adventure.getCommandFromString("drop ump"));
         assertEquals("The item \"ump\" is already in this room!",a.getMessage().get(0));
     }
 
