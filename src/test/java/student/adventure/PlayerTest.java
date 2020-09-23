@@ -3,14 +3,13 @@ package student.adventure;
 
 import org.junit.Before;
 import org.junit.Test;
-import student.server.AdventureState;
+
 
 
 import static org.junit.Assert.*;
-import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
 
-import java.io.PrintStream;
+
+
 import java.sql.SQLException;
 
 
@@ -20,7 +19,7 @@ public class PlayerTest {
 
 
     @Before
-    public void setUp() throws FileNotFoundException, SQLException {
+    public void setUp() throws  SQLException {
         // This is run before every test.
         a = new Adventure("src/Json/Working/Mirage.json",0);
         a.initializeGame();

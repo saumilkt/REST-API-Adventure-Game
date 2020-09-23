@@ -1,18 +1,16 @@
 package student.server;
 
-import org.hamcrest.CoreMatchers;
+
 import org.junit.Before;
 import org.junit.Test;
 import student.adventure.Adventure;
 import student.adventure.Player;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.sql.SQLException;
-import java.util.SortedMap;
+
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+
 
 
 public class AdventureStateTest {
@@ -20,7 +18,7 @@ public class AdventureStateTest {
     private AdventureState a;
     private Adventure adventure;
     private Player p;
-    private final static String DATABASE_URL = "jdbc:sqlite:src/main/resources/adventure.db";
+
 
     @Before
     public void setUp() throws SQLException {

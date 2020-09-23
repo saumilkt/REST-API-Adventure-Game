@@ -1,14 +1,11 @@
 package student.server;
 
-import org.hamcrest.CoreMatchers;
+
 import org.junit.Before;
 import org.junit.Test;
 import student.adventure.Adventure;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.sql.SQLException;
-import java.util.SortedMap;
 
 import static org.junit.Assert.*;
 
@@ -29,7 +26,7 @@ public class GameStatusTest {
                 a.getPlayer().getPlayerAsAdventureState(),
                 a.getPlayer().getCurrentRoom().provideCommandOptions());
     }
-    
+
 
     /* Testing get methods */
     @Test

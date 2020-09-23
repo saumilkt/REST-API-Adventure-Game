@@ -1,6 +1,6 @@
 package student.adventure;
 
-import org.hamcrest.CoreMatchers;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,7 +20,7 @@ public class AdventureTest {
 
 
     @Before
-    public void setUp() throws FileNotFoundException, SQLException {
+    public void setUp() throws SQLException {
         // This is run before every test.
         a = new Adventure("src/Json/Working/Mirage.json",0);
         a.initializeGame();

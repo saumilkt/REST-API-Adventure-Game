@@ -1,24 +1,19 @@
 package student.server;
 
-import org.hamcrest.CoreMatchers;
+
 import org.junit.Before;
 import org.junit.Test;
-import student.adventure.Adventure;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.sql.SQLException;
-import java.util.SortedMap;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+
 
 
 public class CommandTest {
     private Command c;
 
     @Before
-    public void setUp() throws SQLException {
+    public void setUp() {
         // This is run before every test.
         c = new Command("go","up", "Player 0");
     }

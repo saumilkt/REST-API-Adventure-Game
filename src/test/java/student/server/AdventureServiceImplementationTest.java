@@ -1,6 +1,6 @@
 package student.server;
 
-import org.hamcrest.CoreMatchers;
+
 import org.junit.Before;
 import org.junit.Test;
 import student.adventure.Adventure;
@@ -13,7 +13,7 @@ import java.util.SortedMap;
 public class AdventureServiceImplementationTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private AdventureServiceImplementation a;
-    private final static String DATABASE_URL = "jdbc:sqlite:src/main/resources/adventure.db";
+
 
     @Before
     public void setUp() throws SQLException {
