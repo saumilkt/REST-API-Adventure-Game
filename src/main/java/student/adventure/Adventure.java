@@ -74,7 +74,7 @@ public class Adventure {
     /**
      * Sets initial conditions of the game.
      * Assigns current room as first room in json data,
-     * Sets number of rooms traveld to 1
+     * Sets number of rooms traveled to 1
      * adds music data of first room player
      * displays the room's information.
      * @return Finally, promts the user and returns the user's input
@@ -86,6 +86,21 @@ public class Adventure {
         message.addAll(player.getCurrentRoom().displayStatus());
         checkWin(player);
         return promptUser();
+    }
+
+    /**
+     * Sets initial conditions of the game, assuming using Web interface.
+     * Assigns current room as first room in json data,
+     * Sets number of rooms traveled to 1
+     * adds music data of first room player
+     * displays the room's information.
+     */
+    public void initializeGameWeb() throws SQLException {
+        player.setCurrentRoom(rooms.getRooms().get(0));
+        player.addToNumberOfRoomsTraversed();
+        player.updateMusicStatus();
+        message.addAll(player.getCurrentRoom().displayStatus());
+        checkWin(player);
     }
 
     /**
@@ -241,6 +256,26 @@ public class Adventure {
         for(String message : this.message){
             System.out.println(message);
         }
+    }
+
+    /**
+     * Converts String input from scanner to Command object
+     * @param input String gained from user via Scanner class
+     * @return Command object consisting of user's input
+     */
+    public static Command getCommandFromString(String input){
+        input = input.trim();
+        Command command;
+
+        //checks if the input is 1 or 2 words using String split() function and if statement to test length
+        String[] inputString = input.split(" ", 2);
+        if (inputString.length == 1){
+            command = new Command(input);
+        }else{
+            command = new Command(input.split(" ",2)[0],input.split(" ",2)[1]);
+        }
+
+        return command;
     }
 
     /**
