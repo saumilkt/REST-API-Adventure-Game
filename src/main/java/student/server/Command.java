@@ -22,16 +22,25 @@ public class Command {
     public Command(){
         this.commandValue="";
         this.commandName="";
+        this.playerName="";
     }
 
     public Command(String commandName) {
         this.commandName = commandName;
         this.commandValue = "";
+        this.playerName="";
     }
 
     public Command(String commandName, String commandValue) {
         this.commandName = commandName;
         this.commandValue = commandValue;
+        this.playerName="";
+    }
+
+    public Command(String commandName, String commandValue, String playerName) {
+        this.commandName = commandName;
+        this.commandValue = commandValue;
+        this.playerName=playerName;
     }
 
     public String getCommandName() {
