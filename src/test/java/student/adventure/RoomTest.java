@@ -34,6 +34,7 @@ public class RoomTest {
         assertThat("CS 126: Software Design Studio", CoreMatchers.containsString("Software"));
     }
 
+    // Testing getter, add, and remove methods
     @Test
     public void testGetName(){
         assertEquals("Connector", a.getPlayer().getCurrentRoom().getName() );
@@ -144,5 +145,12 @@ public class RoomTest {
         a.getPlayer().getCurrentRoom().displayStatus();
         assertEquals("You are at Connector", a.getMessage().get(0));
         assertEquals("Items visible: AWP", a.getMessage().get(2));
+    }
+
+    // testing provideCommandOptions. Checking for correct key and value needs 2 asserts
+    @Test
+    public void testProvideCommandOptions(){
+        assertEquals("examine", a.getPlayer().getCurrentRoom().provideCommandOptions().keySet().toArray()[0]);
+        assertEquals(0, a.getPlayer().getCurrentRoom().provideCommandOptions().get("examine").size());
     }
 }

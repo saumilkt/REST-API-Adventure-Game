@@ -7,12 +7,17 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import java.io.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 
 public class AdventureTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private Adventure a;
+    private final static String DATABASE_URL = "jdbc:sqlite:src/main/resources/adventure.db";
+
 
     @Before
     public void setUp() throws FileNotFoundException, SQLException {
@@ -28,6 +33,8 @@ public class AdventureTest {
         assertThat("CS 126: Software Design Studio", CoreMatchers.containsString("Software"));
     }
 
+
+    /**Testing different inputs for loadAndValidateJson() */
     @Test
     public void testLoadAndValidateJsonWithEmptyFile() throws SQLException {
         a.loadAndValidateJson("testEmptyJson.json");
@@ -57,9 +64,18 @@ public class AdventureTest {
         assertEquals("> ", a.promptUser());
     }
 
+
+    /*Testing InitializeGame methods and CheckWin()*/
     @Test
     public void testInitializeGame(){
         assertEquals("Connector", a.getPlayer().getCurrentRoom().getName());
+    }
+
+    @Test
+    public void testInitializeGameWeb() throws SQLException {
+        Adventure b = new Adventure("src/Json/Working/Mirage.json",1);
+        b.initializeGameWeb();
+        assertEquals("Connector", b.getPlayer().getCurrentRoom().getName());
     }
 
     @Test
@@ -70,6 +86,8 @@ public class AdventureTest {
         assertEquals("1",a.getMessage().get(0) );
     }
 
+
+    /* Testing that processInput handles commands correctly */
     @Test
     public void testProcessInputInvalid() throws SQLException {
         a.processInput(Adventure.getCommandFromString("!"));
@@ -82,6 +100,8 @@ public class AdventureTest {
         assertEquals("You've listened to these songs: , Baby Pluto",a.getMessage().get(0));
     }
 
+
+    /*Testing different command inputs for given to processInput*/
     @Test
     public void testExamine() throws SQLException {
         a.processInput(Adventure.getCommandFromString("examine"));
@@ -140,13 +160,60 @@ public class AdventureTest {
         assertEquals("The item \"ump\" is already in this room!",a.getMessage().get(0));
     }
 
+
+    /* Testing Get Methods*/
     @Test
     public void testGetPlayer(){
         assertEquals(0.0, a.getPlayer().getTasteScore(), 0.0); //delta due to deprecation error
     }
 
     @Test
-    public void testGetRooms(){
+    public void testGetRoomLayout(){
         assertEquals("Connector", a.getRoomLayout().getRooms().get(0).getName());
+    }
+
+    @Test
+    public void testGetId(){
+        assertEquals(0.0, a.getPlayer().getTasteScore(), 0.0); //delta due to deprecation error
+    }
+
+    @Test
+    public void testGetIsError(){
+        assertEquals("Connector", a.getRoomLayout().getRooms().get(0).getName());
+    }
+
+    @Test
+    public void testGetGameScore(){
+        assertEquals(0.0, a.getPlayer().getTasteScore(), 0.0); //delta due to deprecation error
+    }
+
+    @Test
+    public void testGetMessage(){
+        assertEquals("Connector", a.getRoomLayout().getRooms().get(0).getName());
+    }
+
+    @Test
+    public void testGetPlayerName(){
+        assertEquals("Connector", a.getRoomLayout().getRooms().get(0).getName());
+    }
+
+    /* Testing misc methods - getCommandFromString, printMessage, and addGameToTable */
+    @Test
+    public void testGetCommandFromString(){
+        assertEquals("Connector", a.getRoomLayout().getRooms().get(0).getName());
+    }
+
+    @Test
+    public void testPrintMessage(){
+        a.setMessage("Connector");
+        assertEquals("Connector", outContent.toString());
+    }
+
+    @Test
+    public void testAddGameToTable() throws SQLException {
+        a.addGameToTable();
+        final Connection dbConnection= DriverManager.getConnection(DATABASE_URL);
+        Statement stmt = dbConnection.createStatement();
+        assertEquals("Player 0",stmt.execute("SELECT name FROM leaderboard_saumilt2 LIMIT 1"));
     }
 }

@@ -3,6 +3,7 @@ package student.adventure;
 
 import org.junit.Before;
 import org.junit.Test;
+import student.server.AdventureState;
 
 
 import static org.junit.Assert.*;
@@ -120,6 +121,12 @@ public class PlayerTest {
     public void testRemoveItemOnNonexistentItem() throws SQLException {
         a.processInput(Adventure.getCommandFromString("take AWP"));
         assertEquals("You don't have AWP", a.getMessage().get(0));
+    }
+
+    @Test
+    public void testGetPlayerAsAdventureState() throws SQLException {
+        a.processInput(Adventure.getCommandFromString("go up"));
+        assertEquals(2, a.getPlayer().getPlayerAsAdventureState().getNumberOfRoomsTraversed());
     }
 
 
