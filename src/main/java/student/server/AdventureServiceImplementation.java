@@ -119,7 +119,7 @@ public class AdventureServiceImplementation implements AdventureService{
     /**
      * Adds 1 to the newIdGameNumber variable, so the next game created has a new id number
      */
-    private void iterateNewGameIdNumber(){
+    public void iterateNewGameIdNumber(){
         newGameIdNumber++;
     }
 
@@ -127,7 +127,7 @@ public class AdventureServiceImplementation implements AdventureService{
      * Adds a new instace of Adventure to adventureGamesList
      * @param gameToAdd the Adventure instance to be added
      */
-    private void addToAdventureGamesList(Adventure gameToAdd){
+    public void addToAdventureGamesList(Adventure gameToAdd){
         this.adventureGamesList.add(gameToAdd);
     }
 
@@ -135,7 +135,7 @@ public class AdventureServiceImplementation implements AdventureService{
      * Removes an existing instace of Adventure from adventureGamesList
      * @param gameToRemove the Adventure instance to be removed
      */
-    private void removeFromAdventureGamesList(Adventure gameToRemove){
+    public void removeFromAdventureGamesList(Adventure gameToRemove){
         this.adventureGamesList.remove(gameToRemove);
     }
 
@@ -145,7 +145,7 @@ public class AdventureServiceImplementation implements AdventureService{
      * If id is not found, print message to console.
      * @param id is the id of the Adventure instance that we want to return
      */
-    private Adventure findAdventureInstanceFromId(int id){
+    public Adventure findAdventureInstanceFromId(int id){
         for(Adventure adventureInstance : this.adventureGamesList){
             if ((adventureInstance.getId()==id)){
                 return adventureInstance;
