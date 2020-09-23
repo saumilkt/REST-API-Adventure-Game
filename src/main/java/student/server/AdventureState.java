@@ -4,6 +4,7 @@ import student.adventure.*;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * A class to represent values in a game state.
@@ -71,6 +72,55 @@ public class AdventureState {
         this.currentRoomName = currentRoomName;
         this.items = items;
 
+    }
+
+    /**
+     * @return returns the number of rooms traversed by the player at this point in the game
+     */
+    public int getNumberOfRoomsTraversed(){
+        return numberOfRoomsTraversed;
+    }
+
+    /**
+     * @return the songs the Player has listened to at this point in the game
+     */
+    public ArrayList<String> getSongsListenedTo(){
+        return songsListenedTo;
+    }
+
+    /**
+     * @return the artists of the songs the Player has listened to at this point in the game
+     */
+    public ArrayList<String> getArtistsListenedTo(){
+        return artistsListenedTo;
+    }
+
+    /**
+     * @return the genres of the songs the Player has listened to at this point in the game
+     */
+    public ArrayList<String> getGenresListenedTo(){
+        return genresListenedTo;
+    }
+
+    /**
+     * @return the player's taste score at this point in the game
+     */
+    public double getTasteScore(){
+        return tasteScore;
+    }
+
+    /**
+     * @return the room the player is in at this point in the game
+     */
+    public String getCurrentRoomName(){
+        return currentRoomName;
+    }
+
+    /**
+     * @return the list of items the Player has at this point in the game
+     */
+    public ArrayList<String> getItems(){
+        return items;
     }
 
 }
