@@ -12,7 +12,7 @@ public class AdventureServiceImplementation implements AdventureService{
     //connection to the above db
     private final Connection dbConnection;
     private ArrayList<Adventure> adventureGamesList; //contains a list of all adventure games
-    private int newGameIdNumber=0; //id number of the next game to be instantiated
+    private int newGameIdNumber; //id number of the next game to be instantiated
 
     public AdventureServiceImplementation() throws SQLException {
         this.newGameIdNumber=0;
@@ -152,5 +152,19 @@ public class AdventureServiceImplementation implements AdventureService{
             }
         }
         throw new IllegalArgumentException("There is no game with id # "+id);
+    }
+
+    /**
+     * @return the id number of the next game to be instantiated
+     */
+    public int getNewGameIdNumber(){
+        return newGameIdNumber;
+    }
+
+    /**
+     * @return the list of Adventure games currently instantiated
+     */
+    public ArrayList<Adventure> getAdventureGamesList(){
+        return adventureGamesList;
     }
 }
