@@ -322,6 +322,16 @@ public class Adventure {
     }
 
     /**
+     * Clears the current message list and adds param to message list
+     * Used for testing purposes
+     * @param message message to add to message list
+     */
+    public void setMessage(String message){
+        this.message.clear();
+        this.message.add(message);
+    }
+
+    /**
      * @return the name of the player who is playing on this Adventure game instance
      */
     public String getPlayerName(){
@@ -333,7 +343,7 @@ public class Adventure {
      * Only called when game ends
      * @throws SQLException
      */
-    private void addGameToTable() throws SQLException {
+    public void addGameToTable() throws SQLException {
         Statement stmt = dbConnection.createStatement();
         stmt.execute("INSERT INTO leaderboard_saumilt2 "+ "VALUES(\'"+getPlayerName()+"\',"+getGameScore()+")");
     }
