@@ -37,7 +37,7 @@ public class AdventureServiceImplementation implements AdventureService{
     public int newGame() throws AdventureException, SQLException {
         Adventure a = new Adventure("src/main/resources/Json/Working/Mirage.json",newGameIdNumber);
         a.initializeGameWeb();
-        a.processInput(CliRunner.getCommandFromString("examine"));
+        a.processInput(Adventure.getCommandFromString("examine"));
         addToAdventureGamesList(a);
         iterateNewGameIdNumber();
         return newGameIdNumber-1;
@@ -88,6 +88,7 @@ public class AdventureServiceImplementation implements AdventureService{
     public void executeCommand(int id, Command command) {
         try {
             findAdventureInstanceFromId(id).processInput(command);
+            findAdventureInstanceFromId(id).checkWin(findAdventureInstanceFromId(id).getPlayer());
         }catch(SQLException e){
             e.printStackTrace();
         }

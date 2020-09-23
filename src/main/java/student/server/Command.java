@@ -19,6 +19,11 @@ public class Command {
      */
     private String playerName;
 
+    public Command(){
+        this.commandValue="";
+        this.commandName="";
+    }
+
     public Command(String commandName) {
         this.commandName = commandName;
         this.commandValue = "";
@@ -39,6 +44,18 @@ public class Command {
 
     public String getPlayerName() {
         return playerName;
+    }
+
+    public void setCommandName(String commandName){
+        this.commandName=commandName;
+    }
+
+    public void setPlayerName(String playerName){
+        this.playerName=playerName;
+    }
+
+    public void setCommandValue(String commandValue){
+        this.commandValue=commandValue;
     }
 
     @Override
