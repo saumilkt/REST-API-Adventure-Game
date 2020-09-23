@@ -47,7 +47,8 @@ public class GameStatus {
      */
     private Map<String, List<String>> commandOptions;
 
-    public GameStatus(boolean error, int id, String message, String imageUrl, String videoUrl, AdventureState state, Map<String, List<String>> commandOptions) {
+    public GameStatus(boolean error, int id, String message, String imageUrl, String videoUrl,
+                      AdventureState state, Map<String, List<String>> commandOptions) {
         this.error = error;
         this.id = id;
         this.message = message;

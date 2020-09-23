@@ -34,11 +34,6 @@ public class AdventureStateTest {
                 p.getTasteScore(), p.getCurrentRoom().getName(), p.getItems());
     }
 
-    @Test
-    public void sanityCheck() {
-        // TODO: Remove this unnecessary test case.
-        assertThat("CS 126: Software Design Studio", CoreMatchers.containsString("Software"));
-    }
 
     /* Testing getter methods */
     @Test

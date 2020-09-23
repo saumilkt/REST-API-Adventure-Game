@@ -22,11 +22,6 @@ public class AdventureServiceImplementationTest {
         System.setOut(new PrintStream(outContent));
     }
 
-    @Test
-    public void sanityCheck() {
-        // TODO: Remove this unnecessary test case.
-        assertThat("CS 126: Software Design Studio", CoreMatchers.containsString("Software"));
-    }
 
     /* Testing implementations of methods inherited from AdventureService */
     @Test

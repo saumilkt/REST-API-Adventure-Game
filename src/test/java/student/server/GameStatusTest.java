@@ -29,12 +29,7 @@ public class GameStatusTest {
                 a.getPlayer().getPlayerAsAdventureState(),
                 a.getPlayer().getCurrentRoom().provideCommandOptions());
     }
-
-    @Test
-    public void sanityCheck() {
-        // TODO: Remove this unnecessary test case.
-        assertThat("CS 126: Software Design Studio", CoreMatchers.containsString("Software"));
-    }
+    
 
     /* Testing get methods */
     @Test

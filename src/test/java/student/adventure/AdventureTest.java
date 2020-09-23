@@ -27,11 +27,7 @@ public class AdventureTest {
         System.setOut(new PrintStream(outContent));
     }
 
-    @Test
-    public void sanityCheck() {
-        // TODO: Remove this unnecessary test case.
-        assertThat("CS 126: Software Design Studio", CoreMatchers.containsString("Software"));
-    }
+
 
 
     /**Testing different inputs for loadAndValidateJson() */

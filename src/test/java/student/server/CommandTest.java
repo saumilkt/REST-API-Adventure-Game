@@ -23,11 +23,6 @@ public class CommandTest {
         c = new Command("go","up", "Player 0");
     }
 
-    @Test
-    public void sanityCheck() {
-        // TODO: Remove this unnecessary test case.
-        assertThat("CS 126: Software Design Studio", CoreMatchers.containsString("Software"));
-    }
 
     /* Testing get methods */
     @Test

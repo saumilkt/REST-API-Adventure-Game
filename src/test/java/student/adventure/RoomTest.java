@@ -26,11 +26,6 @@ public class RoomTest {
 
     }
 
-    @Test
-    public void sanityCheck() {
-        // TODO: Remove this unnecessary test case.
-        assertThat("CS 126: Software Design Studio", CoreMatchers.containsString("Software"));
-    }
 
     // Testing getter, add, and remove methods
     @Test
