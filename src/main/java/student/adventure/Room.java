@@ -213,4 +213,34 @@ public class Room {
         return roomStatus;
     }
 
+    /**
+     * Returns the potential commands and arguments the player can execute based on the current game state
+     * @return the Map of the commands and args available to the player
+     * in the format "command" " [arg1,ar2,...,argN]
+     */
+    public Map<String,List<String>> provideCommandOptions(){
+        Map<String, List<String>> commandOptions = new HashMap<String, List<String>>();
+
+        //adding 1 word commands first, values will be empty lists
+        commandOptions.put("examine", new ArrayList<String>());
+        commandOptions.put("introspect", new ArrayList<String>());
+        commandOptions.put("exit", new ArrayList<String>());
+        commandOptions.put("quit", new ArrayList<String>());
+
+        //adding 2 word commands, values will be possible arguments to each command
+
+        /* for the go command, the possible arguments will be the directions the player can go
+         * These possible directions are stored as the keys in the Player's current room's
+         * availableDirectionsAndRooms instance variable
+         */
+        commandOptions.put("go", new ArrayList<String>(getAvailableDirectionsAndRooms().keySet()));
+
+        // for the take command, the possible values are the items in the player's current room
+        commandOptions.put("take", getItems());
+
+        // for the drop command, the possible values are the items in the player's items instance variable
+        commandOptions.put("drop", getItems());
+        return commandOptions;
+    }
+
 }
