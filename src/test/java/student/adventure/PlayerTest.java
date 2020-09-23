@@ -15,7 +15,6 @@ import java.sql.SQLException;
 
 
 public class PlayerTest {
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private Adventure a;
     
 
@@ -25,7 +24,6 @@ public class PlayerTest {
         // This is run before every test.
         a = new Adventure("src/Json/Working/Mirage.json",0);
         a.initializeGame();
-        System.setOut(new PrintStream(outContent));
 
     }
 

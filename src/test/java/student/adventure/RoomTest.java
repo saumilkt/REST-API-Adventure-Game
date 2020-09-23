@@ -16,7 +16,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RoomTest {
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private Adventure a;
 
     @Before
@@ -24,7 +23,6 @@ public class RoomTest {
         // This is run before every test.
         a = new Adventure("\"src/Json/Working/Mirage.json\"",0);
         a.initializeGame();
-        System.setOut(new PrintStream(outContent));
 
     }
 
