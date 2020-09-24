@@ -1,4 +1,4 @@
-package student.adventure;
+import student.adventure.Adventure;
 import student.server.Command;
 
 import java.io.FileNotFoundException;

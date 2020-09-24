@@ -56,7 +56,7 @@ public class AdventureServiceImplementation implements AdventureService{
                 a.getPlayer().getCurrentRoom().getImageUrl(),
                 a.getPlayer().getCurrentRoom().getVideoUrl(),
                 a.getPlayer().getPlayerAsAdventureState(),
-                a.getPlayer().getCurrentRoom().provideCommandOptions());
+                a.getPlayer().getCurrentRoom().provideCommandOptions(a.getPlayer()));
     }
 
     /**

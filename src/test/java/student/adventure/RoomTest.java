@@ -139,7 +139,7 @@ public class RoomTest {
     // testing provideCommandOptions. Checking for correct key and value needs 2 asserts
     @Test
     public void testProvideCommandOptions(){
-        assertEquals("examine", a.getPlayer().getCurrentRoom().provideCommandOptions().keySet().toArray()[0]);
-        assertEquals(0, a.getPlayer().getCurrentRoom().provideCommandOptions().get("examine").size());
+        assertEquals("examine", a.getPlayer().getCurrentRoom().provideCommandOptions(a.getPlayer()).keySet().toArray()[0]);
+        assertEquals(0, a.getPlayer().getCurrentRoom().provideCommandOptions(a.getPlayer()).get("examine").size());
     }
 }

@@ -1,7 +1,6 @@
 package student.adventure;
 
 import java.util.*;
-import static java.lang.System.*;
 
 public class Room {
     /**
@@ -75,7 +74,7 @@ public class Room {
         this.availableDirectionsAndRooms=availableDirectionsAndRooms;
         for(String item : items){
             this.items.add(item.toLowerCase());
-            out.println(item);
+            System.out.println(item);
         }
         this.song=song;
         this.artist=artist;
@@ -218,7 +217,7 @@ public class Room {
      * @return the Map of the commands and args available to the player
      * in the format "command" " [arg1,ar2,...,argN]
      */
-    public Map<String,List<String>> provideCommandOptions(){
+    public Map<String,List<String>> provideCommandOptions(Player p){
         Map<String, List<String>> commandOptions = new HashMap<String, List<String>>();
 
         //adding 1 word commands first, values will be empty lists
@@ -239,7 +238,7 @@ public class Room {
         commandOptions.put("take", getItems());
 
         // for the drop command, the possible values are the items in the player's items instance variable
-        commandOptions.put("drop", getItems());
+        commandOptions.put("drop", p.getItems());
         return commandOptions;
     }
 
